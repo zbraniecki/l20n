@@ -82,7 +82,14 @@ function Expression(ast) {
 
 function Entity(ast) {
   return function(locals) {
-    return ast;
+    var entity = {'value': null, 'attributes': {}};
+    if (ast.attributes) {
+      entity.value = ast.value;
+      entity.attributes = ast.attributes;
+    } else {
+      entity.value = ast;
+    }
+    return entity;
   }
 }
 
