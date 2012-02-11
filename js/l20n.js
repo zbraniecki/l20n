@@ -46,8 +46,11 @@ L20n.Context.prototype = {
     var curObj = this._get(id, args);
     return mObjects['system'].getent(curObj, mObjects['system'], id);
   },
+  getValue: function(id, args) {
+    return mObjects['resources'][id]().value;
+  },
   getAttributes: function(id, args) {
-    return {}; // skip the attributes for now
+    return mObjects['resources'][id]().attributes; // skip the attributes for now
     var curObj = this._get(id, args);
     return mObjects['system'].getattrs(curObj, mObjects['system'], id);
   },
@@ -99,7 +102,6 @@ L20n.Context.prototype = {
   _loadObject: function(data, obj) {
     var ast = Parser.parse(data);
     Compiler.compile(ast, obj);
-    //new Function(data).call(obj);
   },
   _getObject: function(obj, url) {
     var self = this;
