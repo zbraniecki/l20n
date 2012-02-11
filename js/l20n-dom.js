@@ -94,25 +94,24 @@ function localizeNode(ctx, node) {
     node.nodeData = args;
   }
   // get attributes from the LO
-  var attrs = ctx.getAttributes(l10nId, args);
+  var entity = ctx.get(l10nId, args);
   var l10nAttrs;
   if (node.hasAttribute('l10n-attrs'))
     l10nAttrs = node.getAttribute('l10n-attrs').split(" ");
   else
     l10nAttrs = null;
-  if (attrs) {
-    for (var j in attrs) {
+  if (entity.attributes) {
+    for (var j in entity.attributes) {
       if (!l10nAttrs || l10nAttrs.indexOf(j) !== -1)
-        node.setAttribute(j, attrs[j]);
+        node.setAttribute(j, entity.attributes[j]);
     }
   }
-  var valueFromCtx = ctx.get(l10nId, args);
-  if (valueFromCtx === null)
+  if (entity.value === null)
     return;
 
   // deep-copy the original node
   var origNode = node.cloneNode(true);
-  node.innerHTML = valueFromCtx;
+  node.innerHTML = entity.value;
 
   // overlay the attributes of descendant nodes
   var children = node.getElementsByTagName('*');
