@@ -25,7 +25,7 @@ class Serializer():
     def serialize(cls, lol):
         if not hasattr(lol, '_template'):
             setattr(ast.Node, '_serializer', cls)
-        string = str(lol)
+        string = unicode(lol)
         return string
 
     @classmethod
