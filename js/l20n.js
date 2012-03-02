@@ -101,6 +101,51 @@ L20n.Context.prototype = {
   },
   _loadObject: function(data, obj) {
     var ast = Parser.parse(data);
+    ast = {
+      "foo": {
+        "type": "entity", // macro
+        "body": {
+          "id": {
+            "type": "Identifier",
+            "body": {
+              "name": "foo"
+            }
+          }
+          "index": null,
+          "value": {
+            "type": "complexstring",
+            "body": {
+              "content": [
+                {
+                  "type": "string",
+                  "body": {
+                    "content": "foo"
+                  }
+                },
+                {
+                  "type": "expression",
+                  "body": {
+                    "expression": {
+                      "type": "identifier",
+                      "body": {
+                        "name": "downloadCount"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "string",
+                  "body": {
+                    "content": "foo"
+                  }
+                }
+              ]
+            }
+          }
+          "attrs": null
+        }
+      }
+    }
     Compiler.compile(ast, obj);
   },
   _getObject: function(obj, url) {
