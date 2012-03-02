@@ -207,8 +207,8 @@ var Parser = (function(window, document, undefined) {
       switch (token[token.length - 1]) {
         case '"':
         case "'":
-          return getString();
-          //return getSplitString();
+          //return getString();
+          return getSplitString();
           break;
         case '[':
           return getArray();
